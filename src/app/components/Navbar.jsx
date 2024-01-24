@@ -30,16 +30,25 @@ const navLink =[
 const Navbar = () => {
 
   const [navbaropen , setNavbaropen] = useState(false);
+  const [menuOverlay , setmenuOverlay] = useState('block');
+
 
   const handelClick = () => {
+    setNavbaropen(!navbaropen)
+    setmenuOverlay('block')
+   
+  }
+  
+  const menuOverlayClick = () => {
+    setmenuOverlay('hidden')
     setNavbaropen(!navbaropen)
   }
 
   return (
-    <nav className=' max-w-[1440px] mx-auto fixed top-0 left-0 right-0 z-10 bg-gradient-to-r from-orange-500 to-transparent bg-opacity-100'>
+    <nav className=' max-w-[1440px] mx-auto fixed top-0 left-0 right-0 z-10 bg-gradient-to-r from-orange-500 to-transparent bg-opacity-100 '>
       <div className=' flex flex-wrap items-center justify-between mx-auto py-4 px-8
       '> 
-        <Link href={"/"}  className=' text-2xl md:text-5xl text-white font-semibold'> LOGO</Link>
+        <Link href={"/"}  className=' text-2xl md:text-5xl text-white font-semibold'> MINTHU</Link>
         <div  onClick={handelClick} className='block md:hidden'>
           {
             navbaropen ? (
@@ -57,8 +66,8 @@ const Navbar = () => {
             )
           }
         </div>
-        <div className='menu hidden md:block md:w-auto id="navbar"'>
-            <ul className='flex p-0 md:flex-row md:space-x-8 mt-0 '>
+        <div className=' hidden md:block md:w-auto id="navbar"'>
+            <ul className='flex md:flex-row md:space-x-8 mt-0 '>
                 {
                   navLink.map((link, index)=>(
                     <li key={index}>
@@ -70,10 +79,9 @@ const Navbar = () => {
         </div>
       </div>
       {navbaropen ? (
-        <MenuOverlay links={navLink}/>
+        <MenuOverlay onclick={menuOverlayClick} classname={menuOverlay}  links={navLink}/>
       ) 
-      : (       null
-      )
+      : ( null)
  
       }
     </nav>
